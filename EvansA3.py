@@ -46,6 +46,7 @@ state2=np.outer(phi1_plus,phi1_plus.conj())
 state3=np.outer(phi1_minus,phi1_minus.conj()) 
 B0=state+state1
 B1=state2+state3
+
 B=[B0,B1]
 
 sig0=np.array([[0,1],[1,0]])
