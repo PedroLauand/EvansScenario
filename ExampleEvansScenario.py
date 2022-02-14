@@ -38,32 +38,8 @@ for _ in range(10000):
     I=[1/12 for _ in range(12)]
     I=np.array(I)
     v=1
-    
-    
-
-    #aux=EvansBehaviorCheckA3(p)
-    #print(aux)
-p=np.zeros(12)
-p[ind.evansObIndexA3(1,0,0)]=1/8
-p[ind.evansObIndexA3(2,0,0)]=1/8
-p[ind.evansObIndexA3(0,0,1)]=1/4
-p[ind.evansObIndexA3(1,1,0)]=1/4
-p[ind.evansObIndexA3(2,1,1)]=1/4
-
-p=np.array(p)
-print(np.sum(p))
-print(EvansBehaviorCheckA3(p))
-        #print(q)
-        #break
-q=[0  ,  0  , 0.  ,  0. ,   0  ,  0.  ,  0. ,   0. ,   0. ,   0.  ,  0.  ,  0.,
- 0,    0 ,   0 ,   0 ,   0  ,  0   , 0  ,  0,   0,    0,    0,    0,
- 0.25 , 0 ,   0 ,   0  ,  0.   , 0  ,  0 ,   0.125 , 0.125 ,0 ,   0. ,   0,
- 0  ,  0,    0.  ,  0.  ,  0.125, 0.125, 0 ,   0.  ,  0.  ,  0,    0.  ,  0.,
- 0 ,   0,    0.  ,  0.25 , 0.  ,  0.  ,  0.,    0. ,   0.  ,  0,    0.  ,  0.,
- 0.  ,  0.  , 0.   , 0.  ,  0.  ,  0.   , 0.,    0.,    0.,    0,    0.,    0.   ]
-for b1 in range(2):
-    for b0 in range(2):
-        for a in range(2):
-            for x1 in range(3):
-                for x0 in range(3):
-                    print(q[ind.evansA3(x0,x1,a,b0,b1)],"=",x0,x1,a,b0,b1)
+    aux=EvansBehaviorCheckA3(p)
+    print(aux)
+    if aux=="non-classical":
+        print(q)
+        break
