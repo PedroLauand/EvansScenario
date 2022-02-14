@@ -5,7 +5,7 @@ import Indices as ind
 from EvansA3Gurobi import *
 from scipy.stats import unitary_group
 #We can optimize multilinear problems with GUROBI as well !! 
-#Here we are going to optimize the Kdagni's inequality for the evans senario.
+#Here we are going to optimize the Bonet inequality for the evans senario.
 def d(x,y):
     if x==y :
         return 1
@@ -24,12 +24,22 @@ z_C=m.addMVar(4,lb=0,ub=1)
 #Observable distribution p(x,a,b) as a variable and p(x) as a variable.
 p=m.addMVar(12,lb=0,ub=1) 
 p_x=m.addMVar(3,lb=0,ub=1)
+aux=0
+aux1=0
+for j in range(12):
+    aux1=aux1+p[j]
+m.addConstr(aux1==1)
+m.addConstr(p_x[0]+p_x[1]+p_x[2]==1)
+for i in range(72):
+    aux=aux+q[i]
 
+m.addConstr(aux==1)
 
 
 m.Params.NonConvex=2
 m.Params.OutputFlag=1
-
+m.Params.NumericFocus=1
+m.Params.Presolve=2
 for c1 in range(2):
     for c0 in range(2):
         for a1 in range(3):
@@ -60,7 +70,7 @@ for b in range(2):
                             for a0 in range(3):
                                 alpha=[a0,a1]
                                 gamma=[c0,c1]
-                                l=np.append(l,d(x,alpha[a])*d(a,b_)*d(b,gamma[b]))
+                                l=np.append(l,d(x,alpha[b_])*d(a,b_)*d(b,gamma[b_]))
             M=np.append(M,l)
 M=np.reshape(M,(12,72))
 m.addConstr(M@q==p)

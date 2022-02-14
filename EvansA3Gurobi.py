@@ -18,9 +18,15 @@ def EvansBehaviorCheckA3(p):
     z_A=m.addMVar(9,lb=0,ub=1)
     z_C=m.addMVar(4,lb=0,ub=1)
 
+    #v=m.addMVar(1,lb=0,ub=1)
+    #pv=m.addMVar(12,lb=0,ub=1)
+
+    #for i in range(12):
+       # m.addConstr(pv[i]==v[0]*p[i]+(1-v[0])*1/12)
+    
     obj=1
     m.Params.NonConvex=2
-    m.Params.OutputFlag=0
+    m.Params.OutputFlag=1
     m.setObjective(obj, gp.GRB.MINIMIZE)
     for c1 in range(2):
         for c0 in range(2):
@@ -59,9 +65,11 @@ def EvansBehaviorCheckA3(p):
     
     m.optimize()
     status = m.status
+
     if status==gp.GRB.OPTIMAL:
-        
-        return "classical"
+        ob = m.getObjective()
+        print(q.X)
+        return ob.getValue()
     else:
         print(status==gp.GRB.INFEASIBLE,status)
         return "non-classical"
