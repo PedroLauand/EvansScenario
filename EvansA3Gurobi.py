@@ -67,9 +67,8 @@ def EvansBehaviorCheckA3(p):
     status = m.status
 
     if status==gp.GRB.OPTIMAL:
-        ob = m.getObjective()
-        print(q.X)
-        return ob.getValue()
+    
+        return "classical"
     else:
         print(status==gp.GRB.INFEASIBLE,status)
         return "non-classical"
